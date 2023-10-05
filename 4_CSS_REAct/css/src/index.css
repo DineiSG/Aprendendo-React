@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  padding:0;
+  font-family:monospace;
+  
+}
+h1 {
+  color:blue
+}
+
+/*CSS a ser aplicado na classe de acordo com a condicional*/
+.red-title {
+  background-color: black;
+  color:red;
+  padding:15px;
+  border: 5px solid red;
+
+}
+.title {
+  background-color: yellow;  
+  color:blue;
+  border: 15px solid blue
+}

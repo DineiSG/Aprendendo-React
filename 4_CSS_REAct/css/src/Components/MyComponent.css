@@ -1,0 +1,13 @@
+/*O arquivo CSS deve levar o mesmo nome do componente ao qual ele atende*/
+
+/*Pode-se declarar o elemento do componente utilizando um recurso de identificação. No exemplo foi utilizado 
+o recurso de identificação "classe" para o elemento paragrafo criado no JSX. 
+Isso evitará que o estilo "vaze" para o componente pai*/
+.my-comp-paragraph{
+    background-color: brown;
+    color:aliceblue;
+    font-size: 25px;
+    margin:20px;
+    padding:15;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
