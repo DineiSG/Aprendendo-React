@@ -3,10 +3,17 @@
 import {useState, useEffect} from "react";
 import './App.css';
 
+// 4-Custom hook
+//Importando o hook
+import {useFetch} from "./hooks/useFetch"  
+
 //Declarando a url base da API;
 const url = "http://localhost:3000/products"
 
 function App() {
+
+  //4 - Custom hook: imformando o que sera importado e de onde sera importado
+  const {data: items}=useFetch(url)
 
   /*Salvando os dados. o products vai salvar os dados e o setProducts vai 
   auxiliar a colocar os produtos em algum lugar */
@@ -17,17 +24,17 @@ function App() {
   const[price,setPrice]=useState("")
 
   // 1 - Resgatando dados por meio de uma chamada assíncrona utilizando o useEffect
-  useEffect(() =>{
-    async function fetchData(){
+ // useEffect(() =>{
+  //  async function fetchData(){
        // Solicitando uma resposta da requisição
-        const res = await fetch(url)
+      //  const res = await fetch(url)
       // Transformando o Json em Objeto
-        const data=await res.json()
-        setProducts(data)
-        return (data)
-    }
-    fetchData()    
-  },[])
+       // const data=await res.json()
+       // setProducts(data)
+       // return (data)
+  //  }
+    //fetchData()    
+  //},[])
 
   //2 - Adicionando produtos
   const handleSubmit = async(e) =>{
@@ -50,6 +57,18 @@ function App() {
       body: JSON.stringify(product),
     })
 
+    //3Carregamento dinamico apos envio de dados para o BD
+    
+    //Transformando o dado do formato JSON que vem do BD em um objeto
+    const addedProduct = await res.json();
+
+    //Adicionando o produto à lista no front 
+    setProducts ((prevProducts)=>[...prevProducts, addedProduct]);
+
+    //Limpando os states apos envio dos dados ao BD 
+    setName("")
+    setPrice("")
+
   }
   
 
@@ -58,7 +77,8 @@ function App() {
       {/*Imprimindo todos os dados dos produtos no template */}
       <h1>Lista de Produtos</h1>
       <ul>
-        {products.map((product)=>(
+        {/*Validando o tipo de item que sera apresentado no front*/}
+        {items && items.map((product)=>(
           <li key={product.id}>{product.name} - R$ {product.price}</li>
         ))}
       </ul>
@@ -77,7 +97,7 @@ function App() {
             <input type="submit" value="criar"/>
           </form>
       </div>
-      
+
     </div>
     
 
