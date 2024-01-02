@@ -13,11 +13,11 @@ const url = "http://localhost:3000/products"
 function App() {
 
   //4 - Custom hook: imformando o que sera importado e de onde sera importado
-  const {data: items}=useFetch(url)
+  const {data: items, httpConfig}=useFetch(url)
 
   /*Salvando os dados. o products vai salvar os dados e o setProducts vai 
   auxiliar a colocar os produtos em algum lugar */
-  const [products, setProducts] = useState([])
+  //const [products, setProducts] = useState([])
 
   /*Criando os states dos campos do formulario que deverão ser preenchidos*/
   const [name,setName]=useState("")
@@ -47,24 +47,27 @@ function App() {
       name, 
       price,
     }
-    const res = await fetch (url, {
+    //const res = await fetch (url, {
       /*Informando o método e o tipo de dado enviado */
-      method: "POST",
-      headers:{
-        "Content-Type" : "application/json"
-      },
+      //method: "POST",
+      //headers:{
+       // "Content-Type" : "application/json"
+      //},
       /*Enviando o body convertido em JSON */
-      body: JSON.stringify(product),
-    })
+      //body: JSON.stringify(product),
+    //})
 
     //3Carregamento dinamico apos envio de dados para o BD
     
     //Transformando o dado do formato JSON que vem do BD em um objeto
-    const addedProduct = await res.json();
+    //const addedProduct = await res.json();
 
     //Adicionando o produto à lista no front 
-    setProducts ((prevProducts)=>[...prevProducts, addedProduct]);
+    //setProducts ((prevProducts)=>[...prevProducts, addedProduct]);
 
+    //5 - refatorando o POST
+    httpConfig(product, "POST")
+    
     //Limpando os states apos envio dos dados ao BD 
     setName("")
     setPrice("")

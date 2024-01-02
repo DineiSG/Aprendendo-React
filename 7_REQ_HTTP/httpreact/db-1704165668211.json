@@ -49,16 +49,6 @@
       "name": "Camisa Azul",
       "price": "25.5",
       "id": 10
-    },
-    {
-      "name": "Boné",
-      "price": "7.50",
-      "id": 11
-    },
-    {
-      "name": "Bermuda",
-      "price": "85.50",
-      "id": 12
     }
   ]
 }
