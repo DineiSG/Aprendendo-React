@@ -13,7 +13,9 @@ const url = "http://localhost:3000/products"
 function App() {
 
   //4 - Custom hook: imformando o que sera importado e de onde sera importado
-  const {data: items, httpConfig}=useFetch(url)
+  //5 - Refatorando o POST
+  //6 - Loading 
+  const {data: items, httpConfig, loading}=useFetch(url)
 
   /*Salvando os dados. o products vai salvar os dados e o setProducts vai 
   auxiliar a colocar os produtos em algum lugar */
@@ -79,12 +81,19 @@ function App() {
     <div className="App">
       {/*Imprimindo todos os dados dos produtos no template */}
       <h1>Lista de Produtos</h1>
-      <ul>
-        {/*Validando o tipo de item que sera apresentado no front*/}
-        {items && items.map((product)=>(
-          <li key={product.id}>{product.name} - R$ {product.price}</li>
-        ))}
-      </ul>
+      {/* 6 - Loding - Informando que a aplicação esta buscando os dados no BD */}
+      {loading && <p>Carregando dados...</p>}
+      {/*Condicionando a apresentação da lista de produtos ao fim da busca no BD. 
+      Caso a busca tenha sido concluida e nao haja nada mais para ser carregado, nao sera mais apresentada
+      a mensagem "Carregando dados..." */}
+      {!loading &&(
+          <ul>
+            {/*Validando o tipo de item que sera apresentado no front*/}
+            {items && items.map((product)=>(
+              <li key={product.id}>{product.name} - R$ {product.price}</li>
+            ))}
+          </ul>
+      )}
 
       {/*Criando o formulario para envio dos dados para o BD */}
       <div className="add-product">
@@ -97,7 +106,13 @@ function App() {
               Preço:
               <input type="text" value={price} name="price" onChange={(e) =>setPrice(e.target.value)}/>
             </label>
-            <input type="submit" value="criar"/>
+            
+            {/* 7 - State de loading no POST */}
+            {/*Desabilitando o botao enquanto o request e finalizado */}
+            {loading && <input type="submit" disabled value="Aguarde"/>}
+            {/*Sumindo com o botão enquanto o request e finalizado */}
+            {!loading && <input type="submit" value="Criar"/>}
+
           </form>
       </div>
 

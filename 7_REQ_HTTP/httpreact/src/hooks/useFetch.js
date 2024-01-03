@@ -17,6 +17,11 @@ export const useFetch = (url) => {
     const[method, setMethod] = useState(null)
     //criando a chamada para receber os dados quando forem alterados
     const [callFetch, setCallFetch] = useState(false)
+
+    //6 - Loading
+    //criando os states de loading e iniciando como falso pois ainda nao esta carregando nada
+    const [loading, setLoading] = useState(false)
+
     
     //criando o setConfig
     const httpConfig = (data, method) =>{
@@ -35,13 +40,21 @@ export const useFetch = (url) => {
 
     //Criando um request que invocara a requisição da api.
     //Essa requisição sera feia apenas uma vez
+    //Adicionando o loading
     useEffect (() =>{  
         const fetchData = async () => {
+            //6 - Loading
+            //iniciando o loading
+            setLoading(true)
+
             const res = await fetch(url)
 
             const json = await res.json()
 
             setData(json)
+
+            //finalizando o loading
+            setLoading(false)
         }
         fetchData()
         //trazendo os dados atualizados
@@ -65,7 +78,8 @@ export const useFetch = (url) => {
     },[config, method, url])
     
     //Exportando o hook
-    return{data, httpConfig}
+    //Exportando a função loading
+    return{data, httpConfig, loading}
 
 
 } 

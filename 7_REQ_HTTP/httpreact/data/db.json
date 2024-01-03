@@ -59,6 +59,22 @@
       "name": "Bermuda",
       "price": "85.50",
       "id": 12
+    },
+    {
+      "name": "Bota ",
+      "price": "150.9",
+      "id": 13
+    },
+    {
+      "name": "Tenis Adidas",
+      "price": "350.00",
+      "id": 14
+    },
+    {
+      "name": "Tenis New Balance",
+      "price": "350.5",
+      "id": 15
     }
+   
   ]
 }
