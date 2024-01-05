@@ -10,12 +10,15 @@ import {useFetch} from "./hooks/useFetch"
 //Declarando a url base da API;
 const url = "http://localhost:3000/products"
 
+
 function App() {
 
   //4 - Custom hook: imformando o que sera importado e de onde sera importado
   //5 - Refatorando o POST
   //6 - Loading 
-  const {data: items, httpConfig, loading}=useFetch(url)
+  //7 - Tratando erros
+  // Deletando dados
+  const {data: items, httpConfig, loading, error}=useFetch(url)
 
   /*Salvando os dados. o products vai salvar os dados e o setProducts vai 
   auxiliar a colocar os produtos em algum lugar */
@@ -68,13 +71,23 @@ function App() {
     //setProducts ((prevProducts)=>[...prevProducts, addedProduct]);
 
     //5 - refatorando o POST
+    // Configurando o Delete
     httpConfig(product, "POST")
+
+
     
     //Limpando os states apos envio dos dados ao BD 
     setName("")
     setPrice("")
 
+    
+
   }
+
+    // 8 - Deletando um item
+    const handleRemove = (id) =>{
+      httpConfig(id, "DELETE")
+    }
   
 
   return (
@@ -86,11 +99,17 @@ function App() {
       {/*Condicionando a apresentação da lista de produtos ao fim da busca no BD. 
       Caso a busca tenha sido concluida e nao haja nada mais para ser carregado, nao sera mais apresentada
       a mensagem "Carregando dados..." */}
-      {!loading &&(
+
+      {/*7 - Tratando erros */}
+      {/*Se ocorrer algum erro, a mensagem inserida no hook sera exibida */}
+      {error && <p>{error}</p>}
+      {/*Caso ocorrer algum erro ao carregar a lista, ela nao sera exibida, 
+      apenas a mensagem de erro */}
+      {!error &&(
           <ul>
             {/*Validando o tipo de item que sera apresentado no front*/}
             {items && items.map((product)=>(
-              <li key={product.id}>{product.name} - R$ {product.price}</li>
+              <li key={product.id}>{product.name} - R$ {product.price} <button onClick={() =>handleRemove(product.id)}>Excluir</button></li>
             ))}
           </ul>
       )}

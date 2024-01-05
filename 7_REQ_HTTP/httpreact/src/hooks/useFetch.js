@@ -22,6 +22,11 @@ export const useFetch = (url) => {
     //criando os states de loading e iniciando como falso pois ainda nao esta carregando nada
     const [loading, setLoading] = useState(false)
 
+    //7 - Tratando erros
+    const[error, setError] = useState(null)
+ 
+    // 8 - Deletando um item 
+    const [itemId, setItemId] = useState(null)
     
     //criando o setConfig
     const httpConfig = (data, method) =>{
@@ -34,6 +39,20 @@ export const useFetch = (url) => {
                 body: JSON.stringify(data)
             })
             setMethod(method)
+
+            //Configurando o metodo DELETE
+        }else if (method === "DELETE"){
+            setConfig({
+                method,
+                headers:{
+                    "Content-type":"application/json"
+                }
+            })
+            setMethod(method)
+
+            //Chamando o id do produto para deletar
+            setItemId(data)
+         
         }
     }
 
@@ -47,12 +66,21 @@ export const useFetch = (url) => {
             //iniciando o loading
             setLoading(true)
 
-            const res = await fetch(url)
+            // 7 - Tratando erros
+            try{
+                const res = await fetch(url)
 
-            const json = await res.json()
+                const json = await res.json()
 
-            setData(json)
+                setData(json)
+            }catch (error){
 
+                console.log(error.message)
+
+                //Mensagem que sera exibida em caso de erro
+                setError("Houve algum erro ao carregar os dados")
+
+            }
             //finalizando o loading
             setLoading(false)
         }
@@ -61,6 +89,7 @@ export const useFetch = (url) => {
     },[url, callFetch]) 
 
     //5 - refatorando o POST
+    
     useEffect ( ()=>{
         //verificando e validando as configurações de URL
         const httpRequest = async () =>{
@@ -70,16 +99,31 @@ export const useFetch = (url) => {
                 const json = await res.json()
 
                 setCallFetch(json)
+
+                // Deletando elementos
+                //Montando a url de remoção de produto
+            } else if (method === "DELETE") {
+
+                const deleteUrl = {url}/{itemId};
+
+                const res = await fetch(deleteUrl, config)
+
+                const json = await res.json()
+
+                setCallFetch(json)
+
             }
+       
         }
         httpRequest()
         
 
-    },[config, method, url])
+    },[config, method, url, itemId])
     
     //Exportando o hook
     //Exportando a função loading
-    return{data, httpConfig, loading}
+    //exportando a função de erro
+    return{data, httpConfig, loading, error, itemId}
 
 
 } 
