@@ -84,7 +84,7 @@ function App() {
 
   }
 
-    // 8 - Deletando um item
+    //Função para Deletar o item
     const handleRemove = (id) =>{
       httpConfig(id, "DELETE")
     }
@@ -108,6 +108,7 @@ function App() {
       {!error &&(
           <ul>
             {/*Validando o tipo de item que sera apresentado no front*/}
+            {/*Adicionando o botao de excluir aos itens */}
             {items && items.map((product)=>(
               <li key={product.id}>{product.name} - R$ {product.price} <button onClick={() =>handleRemove(product.id)}>Excluir</button></li>
             ))}

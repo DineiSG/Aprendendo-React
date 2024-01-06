@@ -25,7 +25,7 @@ export const useFetch = (url) => {
     //7 - Tratando erros
     const[error, setError] = useState(null)
  
-    // 8 - Deletando um item 
+    //Deletando um item 
     const [itemId, setItemId] = useState(null)
     
     //criando o setConfig
@@ -90,41 +90,39 @@ export const useFetch = (url) => {
 
     //5 - refatorando o POST
     
-    useEffect ( ()=>{
+    useEffect(() =>{
+
+        const httpRequest = async () => {
         //verificando e validando as configurações de URL
-        const httpRequest = async () =>{
-            if(method === "POST"){
-                let fetchOptions = [url, config]
-                const res = await fetch(...fetchOptions)
-                const json = await res.json()
-
-                setCallFetch(json)
-
-                // Deletando elementos
-                //Montando a url de remoção de produto
-            } else if (method === "DELETE") {
-
-                const deleteUrl = {url}/{itemId};
-
-                const res = await fetch(deleteUrl, config)
-
-                const json = await res.json()
-
-                setCallFetch(json)
-
-            }
-       
+        let json;
+ 
+        if (method === "POST") {
+          let fetchOptions = [url, config];
+   
+          const res = await fetch(...fetchOptions);
+   
+          json = await res.json();
+          
+          //Chamando a url preparada para excluir o produto
+        } else if (method === "DELETE") {
+          const deleteUrl = `${url}/${itemId}`;
+   
+          const res = await fetch(deleteUrl, config);
+   
+          json = await res.json();
         }
-        httpRequest()
-        
+   
+        setCallFetch(json);
+      }
+      httpRequest();
 
+      // Declarando as dependencias
     },[config, method, url, itemId])
     
     //Exportando o hook
     //Exportando a função loading
     //exportando a função de erro
-    return{data, httpConfig, loading, error, itemId}
-
-
-} 
+    //Exportando o itemtemId
+    return{data, httpConfig, loading, error}
+}
 
