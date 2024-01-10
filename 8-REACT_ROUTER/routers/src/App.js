@@ -7,6 +7,9 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
 
+//Importando o navbar
+import Navbar from './components/Navbar';
+
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
 
       {/*----------Daqui pra cima tudo será exibido em todas as páginas-------------- */}
       <BrowserRouter>
+      {/*Importando o componente Navbar. Por se tratar de um componente do React Router devemos 
+      coloca-lo dentro do Browser Router */}
+      <Navbar/>
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/About' element={<About/>}/>
