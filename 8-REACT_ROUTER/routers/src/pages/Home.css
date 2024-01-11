@@ -3,6 +3,9 @@
     justify-content: center;
     flex-wrap: wrap;
 }
+li:hover{
+    background-color: aqua;
+}
 .products li{
     border: 1px solid #efefef;
     border-radius: 5px;

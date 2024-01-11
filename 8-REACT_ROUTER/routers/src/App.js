@@ -7,6 +7,9 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
 
+//4 - Rota dinamica
+import Product from './pages/Product';
+
 //Importando o navbar
 import Navbar from './components/Navbar';
 
@@ -23,7 +26,10 @@ function App() {
       <Navbar/>
         <Routes>
           <Route path='/' element={<Home/>}/>
-          <Route path='/About' element={<About/>}/>
+          <Route path='/about' element={<About/>}/>
+
+          {/*4 - Rota dinamica */}
+          <Route path='/products/:id' element={<Product/>}/>
         </Routes>
       </BrowserRouter>
       {/*-----------Daqui pra baixo tudo será exibido em todas as páginas------------- */}
