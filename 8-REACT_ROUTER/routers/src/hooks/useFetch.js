@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 
 export const useFetch = (url) => {
+
     const [data, setData]= useState(null)
 
     const [config, setConfig] = useState(null)
@@ -54,7 +55,6 @@ export const useFetch = (url) => {
                 setData(json)
             }catch (error){
 
-                console.log(error.message)
 
                 setError("Houve algum erro ao carregar os dados")
 
