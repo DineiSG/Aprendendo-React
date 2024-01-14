@@ -41,9 +41,6 @@ export const useFetch = (url) => {
          
         }
     }
-
-
-
     useEffect (() =>{  
         const fetchData = async () => {
            
@@ -67,24 +64,24 @@ export const useFetch = (url) => {
     useEffect(() =>{
 
         const httpRequest = async () => {
-        let json;
- 
-        if (method === "POST") {
-          let fetchOptions = [url, config];
-   
-          const res = await fetch(...fetchOptions);
-   
-          json = await res.json();
-          
-        } else if (method === "DELETE") {
-          const deleteUrl = `${url}/${itemId}`;
-   
-          const res = await fetch(deleteUrl, config);
-   
-          json = await res.json();
-        }
-   
-        setCallFetch(json);
+            let json;
+    
+            if (method === "POST") {
+            let fetchOptions = [url, config];
+    
+            const res = await fetch(...fetchOptions);
+    
+            json = await res.json();
+            
+            } else if (method === "DELETE") {
+            const deleteUrl = `${url}/${itemId}`;
+    
+            const res = await fetch(deleteUrl, config);
+    
+            json = await res.json();
+            }
+    
+            setCallFetch(json);
       }
       httpRequest();
 
