@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 
 export const useFetch = (url) => {
@@ -87,6 +86,5 @@ export const useFetch = (url) => {
 
     },[config, method, url, itemId])
     
-    return{data, httpConfig, loading, error}
+    return{data, httpConfig, loading, error, itemId}
 }
-

@@ -2,7 +2,7 @@
 //importando o useParams
 import { useParams } from "react-router-dom"
 
-import {useGet} from "..//hooks/useGet"
+import {useFetch} from "../hooks/useFetch"
 
 const Product = () => {
 
@@ -10,8 +10,10 @@ const Product = () => {
   //4 - Rota dinamica
   //Pegando o dado informado na tag Link da pagina Home
   const{id} = useParams()
-    const url="http://localhost:3000/products/" 
-    const {data: product, loading, error} = useGet(url)
+  
+    const url= "http://localhost:3000/products/" +id
+    
+    const {data: product, loading, error} = useFetch(url)
 
     return (
       <>
