@@ -1,0 +1,39 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Camisa",
+      "price": 59.9
+    },
+    {
+      "id": 2,
+      "name": "Calça",
+      "price": 89.9
+    },
+    {
+      "id": 3,
+      "name": "jaqueta",
+      "price": 109.9
+    },
+    {
+      "id": 4,
+      "name": "Short",
+      "price": 29.9
+    },
+    {
+      "name": "Camisa",
+      "price": "50.50",
+      "id": 5
+    },
+    {
+      "name": "Camisa",
+      "price": "50.50",
+      "id": 6
+    },
+    {
+      "name": "Camisa Azul",
+      "price": "10",
+      "id": 8
+    }
+  ]
+}

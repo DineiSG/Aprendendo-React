@@ -10,7 +10,7 @@ const Product = () => {
   //Pegando o dado informado na tag Link da pagina Home
   const{id} = useParams()
 
-    const url="http://localhost:3001/products" +id
+    const url="http://localhost:3000/products/" +id
     
     const {data: product, loading, error} = useFetch(url)
 

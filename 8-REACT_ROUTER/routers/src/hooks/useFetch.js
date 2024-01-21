@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
  
 // 4 - custom hook
 export const useFetch = (url) => {
@@ -17,6 +18,7 @@ export const useFetch = (url) => {
  
   // 9 - desafio 6
   const [itemId, setItemId] = useState(null);
+
  
   const httpConfig = (data, method) => {
     if (method === "POST") {

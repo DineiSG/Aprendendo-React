@@ -1,7 +1,7 @@
 import './App.css';
 
 //1 Configurando o Router
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 
 //4 - Rota dinamica
 import Product from './pages/Product';
